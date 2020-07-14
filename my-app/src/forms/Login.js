@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { login } from "./api";
 
 export default class Login extends Component {
     constructor(props) {
@@ -36,14 +37,34 @@ export default class Login extends Component {
         //     })
         // }
         const { name, value } = event.target;
-        this.setState({ data: { ...this.state.data, [name]: value } })
+        this.setState({ data: { ...this.state.data, [name]: value } });
+    };
+
+    submit = (event) => {
+        this.setState({ loading: true, message: {} });
+        // login({ username: this.state.data.username, password: this.state.data.password });
+        login(this.state.data)
+            .then((res) => {
+                console.log("data on response: ", res);
+                // data response: res.data
+                // store to localstorage
+                // redirect to homepage
+                this.setState({ loading: false });
+            })
+            .catch((err) => {
+                console.log("error on response: ", err);
+                console.log("error.response", err.response);
+                this.setState({ message: { err: err.response.data.err }, loading: false });
+            });
+        event.preventDefault();
     };
 
     render() {
-        console.log("State", this.state)
+        console.log("State", this.state);
+        const { message, loading } = this.state;
         return (
             <div>
-                <form action="server.js">
+                <form>
                     <label htmlFor="username">User name</label>
                     <input
                         type="text"
@@ -58,7 +79,13 @@ export default class Login extends Component {
                         onChange={this.onDataChange}
                     />
                     <br />
-                    <input type="submit" value="Submit" />
+                    {message.err && (
+                        <p style={{ color: "red" }}> {message.err} </p>
+                    )}
+                    {loading && (
+                        <p style={{ color: "green" }}> Loading.... </p>
+                    )}
+                    <input type="submit" value="Submit" onClick={this.submit} />
                 </form>
             </div>
         );
