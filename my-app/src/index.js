@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 // import { App } from './App';
 // import App  from './jsx-practice/App'
 // import App from './jsx-practice/ToDo'
-import App from './forms/Login'
+// import App from './forms/Login'
 // import App from './lifecycle/Parent'
+// import App from './redux/Counter'
+import App from './func-class-components/Components'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
