@@ -7,7 +7,8 @@ import ReactDOM from 'react-dom';
 // import App from './lifecycle/Parent'
 // import App from './redux/Counter'
 // import App from './func-class-components/Components'
-import App from './redux/src/App'
+// import App from './redux/src/App'
+import App from '../src/hooks/Hooks';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
